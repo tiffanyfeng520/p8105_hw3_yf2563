@@ -42,15 +42,17 @@ Observations are the level of items in orders by user. There are user / order va
 
 **Questions:**
 
-How many aisles are there, and which aisles are the most items ordered from?
+1. How many aisles are there, and which aisles are the most items ordered from?
 
 ```{r}
 instacart %>% 
 	count(aisle) %>% 
 	arrange(desc(n))
 ```
+There are 134 aisles, and fresh vegetables is the most items ordered from
 
-Make a plot that shows the number of items ordered in each aisle
+
+2. Make a plot that shows the number of items ordered in each aisle
 
 - limiting this to aisles with more than 10000 items ordered. 
 - Arrange aisles sensibly, and organize your plot so others can read it.
@@ -65,10 +67,15 @@ instacart %>%
 	) %>% 
 	ggplot(aes(x = aisle, y = n)) + 
 	geom_point() + 
+  labs(
+    title = "Number of Items (more than 10000) Ordered in Each Aisle"
+  ) +
 	theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+  
 ```
 
-Make a table showing the three most popular items in each of the aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”. Include the number of times each item is ordered in your table.
+3. Make a table showing the three most popular items in each of the aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”. Include the number of times each item is ordered in your table.
 
 ```{r}
 instacart %>% 
@@ -78,11 +85,10 @@ instacart %>%
 	mutate(rank = min_rank(desc(n))) %>% 
 	filter(rank < 4) %>% 
 	arrange(aisle, rank) %>% 
-	knitr::kable()
+  knitr::kable()
 ```
 
-
-Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; format this table for human readers (i.e. produce a 2 x 7 table).
+4. Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; format this table for human readers (i.e. produce a 2 x 7 table).
 
 ```{r, message=FALSE}
 instacart %>% 
