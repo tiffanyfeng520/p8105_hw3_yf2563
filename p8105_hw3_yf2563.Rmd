@@ -42,7 +42,7 @@ Observations are the level of items in orders by user. There are user / order va
 
 **Questions:**
 
-1. How many aisles are there, and which aisles are the most items ordered from?
+**1. How many aisles are there, and which aisles are the most items ordered from?**
 
 ```{r}
 instacart %>% 
@@ -52,7 +52,7 @@ instacart %>%
 There are 134 aisles, and fresh vegetables is the most items ordered from
 
 
-2. Make a plot that shows the number of items ordered in each aisle
+**2. Make a plot that shows the number of items ordered in each aisle**
 
 - limiting this to aisles with more than 10000 items ordered. 
 - Arrange aisles sensibly, and organize your plot so others can read it.
@@ -75,7 +75,7 @@ instacart %>%
   
 ```
 
-3. Make a table showing the three most popular items in each of the aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”. Include the number of times each item is ordered in your table.
+**3. Make a table showing the three most popular items in each of the aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”. Include the number of times each item is ordered in your table.**
 
 ```{r}
 instacart %>% 
@@ -88,7 +88,7 @@ instacart %>%
   knitr::kable()
 ```
 
-4. Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; format this table for human readers (i.e. produce a 2 x 7 table).
+**4. Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; format this table for human readers (i.e. produce a 2 x 7 table).**
 
 ```{r, message=FALSE}
 instacart %>% 
@@ -102,6 +102,29 @@ instacart %>%
 ```
 
 ## Problem 2
+
+**Description of the dataset**
+This problem uses five weeks of accelerometer data collected on a 63 year-old male with BMI 25, who was admitted to the Advanced Cardiac Care Center of Columbia University Medical Center and diagnosed with congestive heart failure (CHF). In this spreadsheet, variables activity.* are the activity counts for each minute of a 24-hour day starting at midnight.
+
+**1. Load, tidy, and otherwise wrangle the data.**
+
+- include all originally observed variables and values; have useful variable names; 
+- include a weekday vs weekend variable; 
+- encode data with reasonable variable classes. 
+- Describe the resulting dataset (e.g. what variables exist, how many observations, etc).
+
+**2. Make a table**
+Traditional analyses of accelerometer data focus on the total activity over the day. 
+
+- aggregate accross minutes to create a total activity variable for each day
+- Are any trends apparent?
+
+**3. Make a plot**
+Accelerometer data allows the inspection activity over the course of the day. 
+
+- Make a single-panel plot that shows the 24-hour activity time courses for each day
+- use color to indicate day of the week
+- Describe in words any patterns or conclusions you can make based on this graph.
 
 
 
