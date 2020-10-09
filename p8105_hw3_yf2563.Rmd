@@ -6,7 +6,7 @@ output: github_document
 ---
 
 
-```{r setup, include=FALSE}
+```{r setup, message=FALSE}
 library(tidyverse)
 library(p8105.datasets)
 
@@ -26,3 +26,15 @@ options(
 scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
 ```
+
+## Problem 1
+
+```{r}
+data("instacart")
+instacart
+summary(instacart)
+```
+
+**Short description:**   
+This dataset contains `r nrow(instacart)` rows and `r ncol(instacart)` columns. 
+
