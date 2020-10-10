@@ -149,6 +149,25 @@ Traditional analyses of accelerometer data focus on the total activity over the 
 - aggregate accross minutes to create a total activity variable for each day
 - Are any trends apparent?
 
+
+```{r}
+accel_table = 
+  accel_data %>%
+  mutate(day = forcats::
+           fct_relevel(day, c("Monday", "Tuesday", "Wednesday", 
+                              "Thursday", "Friday", "Saturday", "Sunday"))) %>% 
+  group_by(week_id, day) %>%
+  summarise(total_counts = sum(accel)) %>%
+  pivot_wider(names_from = week_id,
+              names_prefix = "week_",
+              values_from = total_counts) %>% 
+  knitr::kable(digits = 1)
+
+accel_table
+```
+
+Trends: There is no obvious trend presents in the table. Besides, Monday of week 1 and Saturday of Week 4 and 5 have obvious lower value.
+
 **3. Make a plot**
 Accelerometer data allows the inspection activity over the course of the day. 
 
