@@ -11,6 +11,7 @@ library(tidyverse)
 library(p8105.datasets)
 library(lubridate)
 
+
 knitr::opts_chunk$set(
 	fig.width = 6, 
   fig.asp = .6,
@@ -324,6 +325,24 @@ Comments: In this violin plot, the median for the maximum daily temperature is a
 - showing the distribution of snowfall values greater than 0 and less than 100 separately by year.
 
 
+```{r}
+filter_snow_data =
+  ny_noaa_clean %>%
+  filter(snow < 100) %>% 
+  filter(snow > 0) %>% 
+  mutate(year = as.factor(year))
+
+filter_snow_data  %>%
+  ggplot(aes(snow, fill = year)) +
+  geom_density(alpha = .4, adjust = .5, color = "blue") +
+  facet_grid(year ~ .) + 
+  labs(
+    title = 'Snowfall Values (from 0 to 100) Separately by Year',
+    y = "Year",
+    x = 'Snowfall Values'
+  )
+  
+```
 
 
 
