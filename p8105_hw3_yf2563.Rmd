@@ -10,6 +10,7 @@ output: github_document
 library(tidyverse)
 library(p8105.datasets)
 library(lubridate)
+library(patchwork)
 
 
 knitr::opts_chunk$set(
@@ -307,7 +308,8 @@ max_min_data =
     names_to = "temp_group",
     values_to = "temp_data")
 
-max_min_data %>%
+max_min_plot = 
+  max_min_data %>%
   ggplot(aes(x = temp_group, y = temp_data, fill = temp_group)) + 
   geom_violin(alpha = .5) + 
   labs(
@@ -315,7 +317,8 @@ max_min_data %>%
     y = "Temperature (C)",
     caption = "Data from the rnoaa package"
   ) + 
-  stat_summary(fun = "median", color = "blue")
+  stat_summary(fun = "median", color = "blue") +
+  theme(legend.position = "none")
 ```
 
 Comments: In this violin plot, the median for the maximum daily temperature is around 10 C, and for Minimum daily temperature is around 2 C. The distribution of the maximum daily temperature tend to be left skewed and distribution of the minimum daily temperate is right skewed. There is no obvious many outliers for both data.
@@ -332,7 +335,8 @@ filter_snow_data =
   filter(snow > 0) %>% 
   mutate(year = as.factor(year))
 
-filter_snow_data  %>%
+filter_snow_plot =
+  filter_snow_data  %>%
   ggplot(aes(snow, fill = year)) +
   geom_density(alpha = .4, adjust = .5, color = "blue") +
   facet_grid(year ~ .) + 
@@ -340,10 +344,16 @@ filter_snow_data  %>%
     title = 'Snowfall Values (from 0 to 100) Separately by Year',
     y = "Year",
     x = 'Snowfall Values'
-  )
+  ) +
+  theme(legend.position = "none")
   
 ```
 
+
+two_panel plot:
+```{r}
+max_min_plot + filter_snow_plot
+```
 
 
 
