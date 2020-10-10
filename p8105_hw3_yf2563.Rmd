@@ -238,8 +238,8 @@ ny_noaa_clean =
          month = month(date), 
          day = day(date)) %>%
   mutate(
-    tmin = as.numeric(tmin)/10,
-    tmax = as.numeric(tmax)/10) %>% 
+    tmin = as.numeric(tmin) / 10,
+    tmax = as.numeric(tmax) / 10) %>% 
   select(id, date, year:day, everything())
 ny_noaa_clean
 ```
@@ -262,6 +262,31 @@ The most commonly observed value is 0, since only the cold day could snow, most 
 
 - Make a two-panel plot showing the average max temperature in January and in July in each station across years. 
 - Is there any observable / interpretable structure? Any outliers?
+
+```{r, message=FALSE}
+plot_data_3_3 = 
+  ny_noaa_clean %>%
+  select(id, year, month, tmax) %>%
+  filter(month  %in% c(1,7)) %>% 
+  group_by(id, year, month) %>% 
+  summarise(ave_tmax = mean(tmax, na.rm = T))
+plot_data_3_3
+
+plot_3_3 = 
+  plot_data_3_3 %>% 
+  ggplot(aes(x = year, y = ave_tmax, color = id)) +
+  facet_grid(month ~ .) +
+  viridis::scale_color_viridis(discrete = T) +
+  geom_point(size = .5) + 
+  geom_path(alpha = .5) +
+  ggtitle("Average Max Temperature in January and in July in Each Station across Years") +
+  ylab("Average maximum temperature") +
+  xlab("Year") +
+  theme(legend.position = "none") 
+
+plot_3_3
+```
+
 
 
 #### 3.4. Make a plot
