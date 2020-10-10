@@ -175,8 +175,28 @@ Accelerometer data allows the inspection activity over the course of the day.
 - use color to indicate day of the week
 - Describe in words any patterns or conclusions you can make based on this graph.
 
+```{r}
+accel_plot_data = 
+  accel_data %>%
+  mutate(day = forcats::
+           fct_relevel(day, c("Monday", "Tuesday", "Wednesday", 
+                              "Thursday", "Friday", "Saturday", "Sunday"))) %>%
+  mutate(hour = (minute - 1) %/% 60) %>% 
+  group_by(day_id, hour,day) %>%
+  summarise(total_hour_accel = sum(accel))
+accel_plot_data
 
+accel_plot_data%>%
+  ggplot(aes(x = hour, y = total_hour_accel, group = day_id)) +
+  geom_line(aes(colour=day)) +
+  labs(title = "24-hour Activity Time Courses for Each Day") + 
+  xlab("Time (h)") + 
+  ylab("Activity") +
+  ylim(0,120000)+
+  theme(legend.title = element_blank())
+```
 
+Describe: In the plot of 24-hour activity time courses, during 00:00 to 05:00, the activity in all days are relatively low. After 05:00, the data fluctuates. At around 11:00, the activity in Sundays is relatively higher.
 
 
 
