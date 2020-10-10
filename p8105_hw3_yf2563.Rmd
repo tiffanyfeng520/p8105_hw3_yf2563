@@ -261,7 +261,6 @@ The most commonly observed value is 0, since only the cold day could snow, most 
 #### 3.3. Make a plot
 
 - Make a two-panel plot showing the average max temperature in January and in July in each station across years. 
-- Is there any observable / interpretable structure? Any outliers?
 
 ```{r, message=FALSE}
 plot_data_3_3 = 
@@ -287,12 +286,45 @@ plot_3_3 =
 plot_3_3
 ```
 
+- Is there any observable / interpretable structure? Any outliers?
+
+The average max temperature data in July (around 28) is higher than in January (around 6).  The average max temperature data are relatively stable in each station. There are several outlier in the plot,such us Jun. 1988.
+
 
 
 #### 3.4. Make a plot
 
-- (i) tmax vs tmin for the full dataset (not scatterplot)
-- (ii) make a plot showing the distribution of snowfall values greater than 0 and less than 100 separately by year.
-- commenting on the results
+##### 3.4.1
+
+- tmax vs tmin for the full dataset (not scatterplot)
+
+```{r}
+max_min_data = 
+  ny_noaa_clean %>%
+  pivot_longer(
+    tmax:tmin,
+    names_to = "temp_group",
+    values_to = "temp_data")
+
+max_min_data %>%
+  ggplot(aes(x = temp_group, y = temp_data, fill = temp_group)) + 
+  geom_violin(alpha = .5) + 
+  labs(
+    title = "tmax vs tmin",
+    y = "Temperature (C)",
+    caption = "Data from the rnoaa package"
+  ) + 
+  stat_summary(fun = "median", color = "blue")
+```
+
+Comments: In this violin plot, the median for the maximum daily temperature is around 10 C, and for Minimum daily temperature is around 2 C. The distribution of the maximum daily temperature tend to be left skewed and distribution of the minimum daily temperate is right skewed. There is no obvious many outliers for both data.
+
+##### 3.4.2
+
+- showing the distribution of snowfall values greater than 0 and less than 100 separately by year.
+
+
+
+
 
 
