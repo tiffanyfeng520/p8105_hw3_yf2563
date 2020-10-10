@@ -81,7 +81,8 @@ instacart %>%
 
 #### 1.3. Make a table
 
-showing the three most popular items in each of the aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”. Include the number of times each item is ordered in your table.
+- showing the three most popular items in each of the aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”. 
+- Include the number of times each item is ordered in your table.
 
 ```{r}
 instacart %>% 
@@ -94,7 +95,10 @@ instacart %>%
   knitr::kable()
 ```
 
-**4. Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; format this table for human readers (i.e. produce a 2 x 7 table).**
+#### 1.4. Make a table 
+
+- showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; 
+- format this table for human readers.
 
 ```{r, message=FALSE}
 instacart %>% 
@@ -119,7 +123,7 @@ This problem uses five weeks of accelerometer data collected on a 63 year-old ma
 - include a weekday vs weekend variable; 
 - encode data with reasonable variable classes. 
 
-```{r}
+```{r, message=FALSE}
 accel_data_path = './data/accel_data.csv'
 
 accel_data = 
@@ -143,13 +147,14 @@ accel_data =
 accel_data
 ```
 
- - Describe the resulting dataset (e.g. what variables exist, how many observations, etc).
+- Describe the resulting dataset (e.g. what variables exist, how many observations, etc).
  
 ```{r}
 summary(accel_data)
 ```
 
-Description: The dimension of this resulting dataset is `r dim(accel_data)`, which means that, there are `r dim(accel_data)[1]` observations and `r dim(accel_data)[2]` variables. The variables include `r ls(accel_data)`. `week_id` includes numbers ranging from 1 to 5, and `day_id` includes numbers ranging from 1 to 35 (each day in 5 weeks). `weekday` is weekday vs weekend variable. `minute` includes numbers ranging from 1 to 1440, which represents the original activity_1:activity_1440 (each minute of a 24-hour day starting at midnight).
+**Short description:** 
+The dimension of this resulting dataset is `r dim(accel_data)`, which means that, there are `r dim(accel_data)[1]` observations and `r dim(accel_data)[2]` variables. The variables include `r ls(accel_data)`. `week_id` includes numbers ranging from 1 to 5, and `day_id` includes numbers ranging from 1 to 35 (each day in 5 weeks). `weekday` is weekday vs weekend variable. `minute` includes numbers ranging from 1 to 1440, which represents the original activity_1:activity_1440 (each minute of a 24-hour day starting at midnight).
 
 #### 2.2. Make a table
 Traditional analyses of accelerometer data focus on the total activity over the day. 
@@ -158,7 +163,7 @@ Traditional analyses of accelerometer data focus on the total activity over the 
 - Are any trends apparent?
 
 
-```{r}
+```{r, message=FALSE}
 accel_table = 
   accel_data %>%
   mutate(day = forcats::
@@ -174,7 +179,8 @@ accel_table =
 accel_table
 ```
 
-Trends: There is no obvious trend presents in the table. Besides, Monday of week 1 and Saturday of Week 4 and 5 have obvious lower value.
+**Trends:** 
+There is no obvious trend presents in the table. Besides, Monday of week 1 and Saturday of Week 4 and 5 have obvious lower value.
 
 #### 2.3. Make a plot
 Accelerometer data allows the inspection activity over the course of the day. 
@@ -183,7 +189,7 @@ Accelerometer data allows the inspection activity over the course of the day.
 - use color to indicate day of the week
 - Describe in words any patterns or conclusions you can make based on this graph.
 
-```{r}
+```{r, message=FALSE}
 accel_plot_data = 
   accel_data %>%
   mutate(day = forcats::
@@ -203,7 +209,8 @@ accel_plot_data%>%
   ylim(0,120000)
 ```
 
-Describe: In the plot of 24-hour activity time courses, during 00:00 to 05:00, the activity in all days are relatively low. After 05:00, the data fluctuates. At around 11:00, the activity in Sundays is relatively higher.
+**Short description:** 
+In the plot of 24-hour activity time courses, during 00:00 to 05:00, the activity in all days are relatively low. After 05:00, the data fluctuates. At around 11:00, the activity in Sundays is relatively higher.
 
 ## Problem 3
 
@@ -219,7 +226,8 @@ data("ny_noaa")
 ny_noaa
 summary(ny_noaa)
 ```
-Description: The dimension of this dataset is `r dim(ny_noaa)`. This dataset contains `r nrow(ny_noaa)` rows and `r ncol(ny_noaa)` columns. The variables include `r ls(ny_noaa)`. 
+**Short description:** 
+The dimension of this dataset is `r dim(ny_noaa)`. This dataset contains `r nrow(ny_noaa)` rows and `r ncol(ny_noaa)` columns. The variables include `r ls(ny_noaa)`. 
 
 - `id` represents different weather station; 
 - `date` is from 1981-01-01 to 2010-12-31
@@ -246,7 +254,8 @@ ny_noaa_clean =
 ny_noaa_clean
 ```
 
-Description: The dimension of the cleaned dataset is `r dim(ny_noaa_clean)`. This dataset contains `r nrow(ny_noaa_clean)` rows and `r ncol(ny_noaa_clean)` columns. The variables include `r ls(ny_noaa_clean)`. 
+**Short description:** 
+The dimension of the cleaned dataset is `r dim(ny_noaa_clean)`. This dataset contains `r nrow(ny_noaa_clean)` rows and `r ncol(ny_noaa_clean)` columns. The variables include `r ls(ny_noaa_clean)`. 
 
 
 - For snowfall, what are the most commonly observed values? Why?
@@ -347,8 +356,8 @@ filter_snow_plot =
 ```
 
 
-two_panel plot:
-```{r}
+Two_panel plot:
+```{r, message=FALSE}
 max_min_plot + filter_snow_plot
 ```
 
